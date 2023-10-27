@@ -1,5 +1,6 @@
 
 const arr=[]
+const bcrypt = require("bcrypt");
 // register...............
 const register=(req,res)=>{
     const data = req.body;
