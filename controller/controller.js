@@ -1,4 +1,5 @@
 
+const arr=[]
 // register...............
 const register=(req,res)=>{
     const data = req.body;
@@ -30,7 +31,7 @@ const login=(req,res)=>{
        const validate=bcrypt.compareSync(logindata.password,logindetails.password)
       if(validate){
         return res.send({msg:"User Login successfully"})
-        
+
   
       }
       else{
