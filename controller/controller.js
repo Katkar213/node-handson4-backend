@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt=require("jsonwebtoken");
 const secret_key="ketan";
 
+
 // register...............
 const register=(req,res)=>{
     const data = req.body;
@@ -55,4 +56,9 @@ const login=(req,res)=>{
 
 }
 
-module.exports={register,login}
+const home=(req,res)=>{
+  res.send("hello")
+
+}
+
+module.exports={register,login,home}
