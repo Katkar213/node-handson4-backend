@@ -1,9 +1,13 @@
 
 const arr=[]
 const bcrypt = require("bcrypt");
+const jwt=require("jsonwebtoken");
+const secret_key="ketan";
+
 // register...............
 const register=(req,res)=>{
     const data = req.body;
+
 
     const details = arr.find((item) => item.email === data.email);
   
@@ -11,13 +15,15 @@ const register=(req,res)=>{
       return res.send({ msg: "User already registered" });
     }
 
-      // const salt = await bcrypt.genSalt(10);
       const hashpassword =bcrypt.hashSync(data.password,10);
       data.password = hashpassword;
       arr.push(data);
+
+     const token= jwt.sign({usweemail:data.email},secret_key,{expiresIn:"36000"})  //we generate jwt here..
+   console.log(token)
       console.log(arr);
 
-      return res.send({msg:"user registered"});
+      return res.send({msg:"user registered",token:token});
 }
 
 
@@ -30,8 +36,12 @@ const login=(req,res)=>{
   
     if (logindetails) {
        const validate=bcrypt.compareSync(logindata.password,logindetails.password)
+
       if(validate){
-        return res.send({msg:"User Login successfully"})
+
+        const token=jwt.sign({useremail:data.email},secret_key,{expiresIn:"360000000000"});
+        console.log(token)
+        return res.send({msg:"User Login successfully",token:token})
 
   
       }
