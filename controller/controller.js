@@ -12,14 +12,14 @@ const register=(req,res)=>{
     const details = arr.find((item) => item.email === data.email);
   
     if (details) {
-      return res.send({ msg: "User already registered" });
+      return res.send({ msg:"User already registered" });
     }
 
       const hashpassword =bcrypt.hashSync(data.password,10);
       data.password = hashpassword;
       arr.push(data);
 
-     const token= jwt.sign({usweemail:data.email},secret_key,{expiresIn:"36000"})  //we generate jwt here..
+     const token= jwt.sign({usweemail:data.email},secret_key,{expiresIn:"36000000000000"})  //we generate jwt here..
    console.log(token)
       console.log(arr);
 
@@ -39,7 +39,7 @@ const login=(req,res)=>{
 
       if(validate){
 
-        const token=jwt.sign({useremail:data.email},secret_key,{expiresIn:"360000000000"});
+        const token=jwt.sign({useremail:logindata.email},secret_key,{expiresIn:"360000000000"});
         console.log(token)
         return res.send({msg:"User Login successfully",token:token})
 
