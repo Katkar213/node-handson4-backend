@@ -53,7 +53,6 @@ const login=(req,res)=>{
     else{
       return res.send({msg:"user not found"})
     }
-
 }
 
 const home=(req,res)=>{
